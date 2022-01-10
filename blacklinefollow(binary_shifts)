@@ -1,0 +1,42 @@
+int sv = 0b000; //sv means sensor value
+int l=2,m=3,r=4,out1=5,out2=6,out3=10,out4=11;
+void setup()
+{
+  pinMode(l,INPUT);//left
+  pinMode(m,INPUT);//middle
+  pinMode(r,INPUT);//right
+  pinMode(out1,OUTPUT);
+  pinMode(out2,OUTPUT);
+  pinMode(out3,OUTPUT);
+  pinMode(out4,OUTPUT);
+}
+void loop()
+{
+  sv=(digitalRead(r)<<2)|(digitalRead(m)<<1)|digitalRead(l);
+  if(sv==0b010){//forward directons
+  digitalWrite(out3,HIGH);
+  digitalWrite(out2,HIGH); 
+  digitalWrite(out1,0);
+  digitalWrite(out4,0);
+  }
+  else if(sv==0b100||sv==0b110){//left
+  digitalWrite(out3,LOW);
+  digitalWrite(out2,HIGH);
+  digitalWrite(out1,0);
+  digitalWrite(out4,0);
+  delay(60);
+  }
+  else if(sv==0b001||sv==0b011){//right
+  digitalWrite(out3,HIGH);
+  digitalWrite(out2,LOW);
+  digitalWrite(out1,0);
+  digitalWrite(out4,0);
+  delay(60);
+  }
+  else if(sv==0b111){//stops
+  digitalWrite(out3,0);
+  digitalWrite(out2,0);
+  digitalWrite(out1,0);
+  digitalWrite(out4,0);
+  }
+}
