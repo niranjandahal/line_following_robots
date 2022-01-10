@@ -1,0 +1,42 @@
+int in1=6,in2=7,in3=8,in4=9,l,m,r;
+void setup() {
+  pinMode(in1,OUTPUT); //motor driver output from arduino
+  pinMode(in2,OUTPUT);//
+  pinMode(in3,OUTPUT);
+  pinMode(in4,OUTPUT);
+  pinMode(2,INPUT);//ir 1st
+  pinMode(3,INPUT);//ir 2nd
+  pinMode(4,INPUT);//ir 3rd
+}
+void loop() {
+  l = digitalRead(2); //left sensor
+  m = digitalRead(3);//middle sensor
+  r = digitalRead(4);//right sensor 
+  if(l==0&&m==1&&r==0){//forward directions
+  digitalWrite(in1,1);
+  digitalWrite(in2,0);
+  digitalWrite(in3,1);
+  digitalWrite(in4,0);
+  }
+  if(l==1&&r==0){//left turns
+  digitalWrite(in1,0);
+  digitalWrite(in2,0);
+  digitalWrite(in3,1);
+  digitalWrite(in4,0);
+  }
+  if(l==0&&r==1){//right turns
+  digitalWrite(in1,1);
+  digitalWrite(in2,0);
+  digitalWrite(in3,0);
+  digitalWrite(in4,0);
+  }
+  if(l==0&&m==0&&r==0){//stops the robots
+  digitalWrite(in1,0);
+  digitalWrite(in2,0);
+  digitalWrite(in3,0);
+  digitalWrite(in4,0);  
+  }
+}
+
+  
+
